@@ -19,6 +19,10 @@ RUN yum erase -y libfontenc libgusb libipa_hbac libmbim libqmi libreport-plugin-
 RUN rm -f /root/anaconda-ks.cfg
 
 
+# Remove root password
+RUN passwd -d root
+
+
 # Patch rootfs for docker-based builds
 RUN curl -Lkq http://j.mp/scw-skeleton | FLAVORS=common,docker-based bash -e
 RUN /usr/local/sbin/builder-enter
@@ -29,7 +33,6 @@ ADD ./patches/etc/ /etc/
 
 
 # TEMPORARY DEBUG ACCESS
-RUN echo root:toor2 | chpasswd
 RUN umask 077; mkdir /root/.ssh
 # moul
 RUN (curl https://github.com/moul.keys; echo) >> /root/.ssh/authorized_keys \

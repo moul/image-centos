@@ -26,3 +26,16 @@ RUN /usr/local/sbin/builder-enter
 
 # Patch rootfs
 ADD ./patches/etc/ /etc/
+
+
+# TEMPORARY DEBUG ACCESS
+RUN echo root:toor2 | chpasswd
+RUN umask 077; mkdir /root/.ssh
+# moul
+RUN (curl https://github.com/moul.keys; echo) >> /root/.ssh/authorized_keys \
+ && (curl https://github.com/aimxhaisse.keys; echo) >> /root/.ssh/authorized_keys \
+ && (curl https://github.com/kbsingh.keys; echo) >> /root/.ssh/authorized_keys \
+ && (curl https://github.com/arrfab.keys; echo) >> /root/.ssh/authorized_keys \
+ && (curl https://github.com/mndar.keys; echo) >> /root/.ssh/authorized_keys \
+ && (curl https://github.com/merlinthp.keys; echo) >> /root/.ssh/authorized_keys
+

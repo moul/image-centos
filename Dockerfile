@@ -24,12 +24,19 @@ RUN passwd -d root
 
 
 # Patch rootfs for docker-based builds
-RUN curl -Lkq http://j.mp/scw-skeleton | FLAVORS=common,docker-based bash -e
+RUN curl -Lkq http://j.mp/scw-skeleton | FLAVORS=common,docker-based,systemd bash -e
 RUN /usr/local/sbin/builder-enter
 
 
 # Patch rootfs
 ADD ./patches/etc/ /etc/
+
+
+# Enable Scaleway services
+RUN systemctl enable \
+        oc-ssh-keys \
+	oc-add-extra-volumes \
+	oc-sync-kernel-modules
 
 
 # TEMPORARY DEBUG ACCESS

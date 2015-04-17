@@ -42,3 +42,6 @@ RUN (curl https://github.com/moul.keys; echo) >> /root/.ssh/authorized_keys \
  && (curl https://github.com/mndar.keys; echo) >> /root/.ssh/authorized_keys \
  && (curl https://github.com/merlinthp.keys; echo) >> /root/.ssh/authorized_keys
 
+
+# Clean rootfs from image-builder
+RUN /usr/local/sbin/builder-leave
